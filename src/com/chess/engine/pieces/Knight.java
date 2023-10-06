@@ -16,7 +16,7 @@ import static com.chess.engine.board.Move.*;
 public class Knight extends Piece{
 
     private final static int[] CANDIDATE_MOVE_COORDINATES = {-17, -15, -10, -6, 6, 10, 15, 17};
-    Knight(final int piecePosition, final Alliance pieceAlliance) {
+    public Knight(final int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
     }
 
@@ -30,16 +30,10 @@ public class Knight extends Piece{
 
             if (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
 
-                if (isFirstColumnExclusion(this.piecePosition, currentCandidateOffset)) {
-                    continue;
-                }
-                if (isSecondColumnExclusion(this.piecePosition, currentCandidateOffset)) {
-                    continue;
-                }
-                if (isSeventhColumnExclusion(this.piecePosition, currentCandidateOffset)) {
-                    continue;
-                }
-                if (isEighthColumnExclusion(this.piecePosition, currentCandidateOffset)) {
+                if (isFirstColumnExclusion(this.piecePosition, currentCandidateOffset) ||
+                        isSecondColumnExclusion(this.piecePosition, currentCandidateOffset) ||
+                        isSeventhColumnExclusion(this.piecePosition, currentCandidateOffset) ||
+                        isEighthColumnExclusion(this.piecePosition, currentCandidateOffset)){
                     continue;
                 }
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
