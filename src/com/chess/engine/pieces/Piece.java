@@ -20,22 +20,18 @@ public abstract class Piece {
         this.piecePosition = piecePosition;
         this.pieceAlliance = pieceAlliance;
     }
-
     public int getPiecePosition() {
         return this.piecePosition;
     }
     public Alliance getPieceAlliance(){
         return this.pieceAlliance;
     }
-
     public boolean isFirstMove() { return this.isFirstMove; }
-
     public PieceType getPieceType() {
         return pieceType;
     }
-
     public abstract Collection<Move> calculateLegalMoves(final Board board);
-
+    public abstract Piece movedPiece(Move move);
     public enum PieceType {
 
         PAWN("P"){
