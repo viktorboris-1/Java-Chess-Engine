@@ -1,6 +1,7 @@
 package com.chess.engine.board;
 
 import com.chess.engine.Alliance;
+import com.chess.engine.engine.engine.pieces.*;
 import com.chess.engine.pieces.*;
 import com.chess.engine.player.BlackPlayer;
 import com.chess.engine.player.Player;
@@ -8,7 +9,6 @@ import com.chess.engine.player.WhitePlayer;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
-import java.nio.file.AtomicMoveNotSupportedException;
 import java.util.*;
 
 public class Board {
