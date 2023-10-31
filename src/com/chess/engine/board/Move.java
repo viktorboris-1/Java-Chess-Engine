@@ -89,11 +89,14 @@ public abstract class Move {
     }
 
     public static class AttackMove extends Move {
+
+        private final Piece attackedPiece;
         public AttackMove(final Board board,
                    final Piece movedPiece,
                    final int destinationCoordinate,
                    final Piece attackedPiece) {
             super(board, movedPiece, destinationCoordinate);
+            this.attackedPiece = attackedPiece;
         }
         @Override
         public int hashCode(){
@@ -253,7 +256,7 @@ public abstract class Move {
             throw new RuntimeException("Cannot execute the null move");
         }
     }
-    public static class MoveFactory() {
+    public static class MoveFactory {
         private MoveFactory() {
             throw new RuntimeException("Not Instantiable");
         }
