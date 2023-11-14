@@ -20,4 +20,6 @@ public class MoveTransition {
     public MoveStatus getMoveStatus() {
         return this.moveStatus;
     }
+
+    public Board getBoard() {return this.transitionBoard;}
 }
