@@ -39,7 +39,7 @@ public class Table {
     private final static Dimension BOARD_PANEL_DIMENSION = new Dimension(400,350);
     private final static Dimension TILE_PANEL_DIMENSION = new Dimension(10,10);
     private final static String pieceIconPath = "art/pieces/";
-    private final static String highlightIconPath = "art/highlights";
+    private final static String highlightIconPath = "art/highlights/";
     private final Color lightTileColor = Color.decode("#FFFACD");
     private final Color darkTileColor = Color.decode("#593E1A");
 
@@ -179,27 +179,27 @@ public class Table {
                             destinationTile = chessBoard.getTile(tileId);
                             final Move move = Move.MoveFactory.createMove(chessBoard, sourceTile.getTileCoordinate(), destinationTile.getTileCoordinate());
                             final MoveTransition transition = chessBoard.currentPlayer().makeMove(move);
-                            if(transition.getMoveStatus().isDone()) {
+                            if (transition.getMoveStatus().isDone()) {
                                 chessBoard = transition.getBoard();
                                 //TODO Add Move that was made to move log
                                 sourceTile = null;
                                 destinationTile = null;
                                 humanMovedPiece = null;
-
                             }
-                            SwingUtilities.invokeLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        boardPanel.drawBoard(chessBoard);
-                                    } catch (IOException ex) {
-                                        throw new RuntimeException(ex);
-                                    }
-                                }
-                            });
                         }
                     }
+                    SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            boardPanel.drawBoard(chessBoard);
+                        } catch (IOException ex) {
+                           throw new RuntimeException(ex);
+                           }
+                        }
+                    });
                 }
+
                 @Override
                 public void mousePressed(MouseEvent e) {
 
