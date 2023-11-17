@@ -15,8 +15,11 @@ import static com.chess.engine.board.Move.*;
 public class Pawn extends Piece {
     private final static int[] CANDIDATE_MOVE_COORDINATES = {8, 16, 7, 9};
 
-    public Pawn(int piecePosition, Alliance pieceAlliance) {
-        super(PieceType.PAWN, piecePosition, pieceAlliance);
+    public Pawn(final int piecePosition, final Alliance pieceAlliance) {
+        super(PieceType.PAWN, piecePosition, pieceAlliance, true);
+    }
+    public Pawn(final int piecePosition, final Alliance pieceAlliance, final boolean isFirstMove) {
+        super(PieceType.PAWN, piecePosition, pieceAlliance, isFirstMove);
     }
 
     @Override
@@ -34,16 +37,16 @@ public class Pawn extends Piece {
             if (currentCandidateOffset == 8 && !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                 //TODO Temporary legalMoves addition must flush out
                 legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
-            } else if (currentCandidateOffset == 16 && this.isFirstMove() && (BoardUtils.SEVENTH_RANK[this.piecePosition] &&
+            } else if (currentCandidateOffset == 16 && this.isFirstMove() && ((BoardUtils.SEVENTH_RANK[this.piecePosition] &&
                     this.pieceAlliance.isBlack()) || (BoardUtils.SECOND_RANK[this.piecePosition] &&
-                    this.pieceAlliance.isWhite())) {
+                    this.pieceAlliance.isWhite()))) {
 
                 final int behindCandidateDestinationCoordinate = this.piecePosition + (this.pieceAlliance.getDirection() * 8);
 
                 if (!board.getTile(behindCandidateDestinationCoordinate).isTileOccupied() &&
                         !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     //TODO Temporary legalMoves addition must flush out
-                    legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+                    legalMoves.add(new PawnJump(board, this, candidateDestinationCoordinate));
                 }
 
             } else if (currentCandidateOffset == 7 &&
@@ -54,10 +57,10 @@ public class Pawn extends Piece {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
                         // TODO more to fill in here
-                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+                        legalMoves.add(new PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
                     }
                 }
-            } else if (currentCandidateOffset == 7 &&
+            } else if (currentCandidateOffset == 9 &&
                     !((BoardUtils.EIGHT_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack() ||
                             (BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceAlliance.isWhite())))) {
 
@@ -65,7 +68,7 @@ public class Pawn extends Piece {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
                         // TODO more to fill in here
-                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+                        legalMoves.add(new PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
                     }
                 }
             }

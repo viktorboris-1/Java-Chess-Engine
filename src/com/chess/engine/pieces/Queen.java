@@ -15,8 +15,11 @@ import static com.chess.engine.board.Move.*;
 
 public class Queen extends Piece{
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -8, -7, -1, 1, 7, 8, 9};
-    public Queen(int piecePosition, Alliance pieceAlliance) {
-        super(PieceType.QUEEN, piecePosition, pieceAlliance);
+    public Queen(final int piecePosition, final Alliance pieceAlliance) {
+        super(PieceType.QUEEN, piecePosition, pieceAlliance, true);
+    }
+    public Queen(final int piecePosition, final Alliance pieceAlliance, final boolean isFirstMove) {
+        super(PieceType.QUEEN, piecePosition, pieceAlliance, isFirstMove);
     }
 
 

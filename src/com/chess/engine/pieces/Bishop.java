@@ -15,9 +15,14 @@ import static com.chess.engine.board.Move.*;
 public class Bishop extends Piece{
 
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -7, 7, 9};
-    public Bishop(int piecePosition, Alliance pieceAlliance) {
-        super(PieceType.BISHOP, piecePosition, pieceAlliance);
+    public Bishop(final int piecePosition, final Alliance pieceAlliance) {
+        super(PieceType.BISHOP, piecePosition, pieceAlliance, true);
     }
+
+    public Bishop(final int piecePosition, final Alliance pieceAlliance, final boolean isFistMove) {
+        super(PieceType.BISHOP, piecePosition, pieceAlliance, isFistMove);
+    }
+
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
 
