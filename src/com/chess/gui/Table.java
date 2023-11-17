@@ -182,24 +182,23 @@ public class Table {
                             if (transition.getMoveStatus().isDone()) {
                                 chessBoard = transition.getBoard();
                                 //TODO Add Move that was made to move log
-                                sourceTile = null;
-                                destinationTile = null;
-                                humanMovedPiece = null;
                             }
+                            sourceTile = null;
+                            destinationTile = null;
+                            humanMovedPiece = null;
                         }
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    boardPanel.drawBoard(chessBoard);
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        });
                     }
-                    SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            boardPanel.drawBoard(chessBoard);
-                        } catch (IOException ex) {
-                           throw new RuntimeException(ex);
-                           }
-                        }
-                    });
                 }
-
                 @Override
                 public void mousePressed(MouseEvent e) {
 
